@@ -1,0 +1,60 @@
+.v--modal {
+  background: $gradient;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1px !important;
+
+  @media (max-width: $mqWith)  {
+    top: 0 !important;
+  }
+}
+
+.modal-inner {
+  background: $dark;
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow: auto;
+}
+
+.modal-headline {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  line-height: 17pt;
+  color: #fff;
+  margin: 0;
+}
+
+.sample-text {
+  float: left;
+  font-size: 14px;
+  color: rgba(#fff, .7);
+  line-height: 17pt;
+  width: 100%;
+}
+
+.icon-play {
+  background: url('./img/play.png') no-repeat;
+  width: 17px;
+  height: 20px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.action-btn {
+  background: $gradient;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 20px 10px 15px;
+  cursor: pointer;
+  float: left;
+  margin: 20px 0;
+
+  &:active {
+    opacity: .6;
+  }
+}
+  
