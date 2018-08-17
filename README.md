@@ -1,6 +1,8 @@
 Years To Read
 ===============
 
+[![Open Source Helpers](https://www.codetriage.com/devfake/years-to-read/badges/users.svg)](https://www.codetriage.com/devfake/years-to-read)
+
 [years-to-read.com](http://years-to-read.com) is a web app that tells you how long it will take you to read a book. It's build on top of Vue and Express and uses the Google Books API.
 
 ![Years To Read](https://i.imgur.com/zW3s8x7.png)
