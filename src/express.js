@@ -6,6 +6,9 @@ const http = require('axios')
 
 const app = express()
 
+const STATUS_FORBIDDEN = 403
+const STATUS_NOT_FOUND = 404
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/../dist/index.html'))
 })
@@ -21,7 +24,11 @@ app.get('/api', (req, res) => {
       res.json(formattedData)
     })
     .catch(error => {
-      console.log(error)
+      if (error.response.status === STATUS_FORBIDDEN) {
+        res.json(forbiddenResponse())
+      }
+      
+      console.log(error.response)
     })
 })
 
@@ -45,8 +52,15 @@ function responseIsEmpty(data) {
 
 function emptyResponse() {
   return {
-    status: 404,
+    status: STATUS_NOT_FOUND,
     message: 'No results found'
+  }
+}
+
+function forbiddenResponse() {
+  return {
+    status: STATUS_FORBIDDEN,
+    message: 'Request forbidden. Google Books API volume used up.'
   }
 }
 
