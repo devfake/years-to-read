@@ -9,11 +9,11 @@ Years To Read
 
 ### Requirements
 * Node >= 9
-* Google Books [API-Key](https://developers.google.com/books/).
+* Google Books [API-Key](https://developers.google.com/books/)
 
 ### Installation
 * Clone this repo
-* Copy `.env.example` to `.env` and enter you `GOOGLE_API_KEY` 
+* Copy `.env.example` to `.env` and enter your `GOOGLE_API_KEY` 
 
 ### Development
 * Run `npm install`
