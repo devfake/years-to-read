@@ -4,6 +4,20 @@
     <nav>
       <a @click="showSpeedModal()">Change your reading speed</a>
       <a target="_blank" href="https://github.com/devfake/years-to-read">Github</a>
+      <div class="translations-wrap">
+        <span @click="toggleTranslations()">{{ activeTranslation }} <i></i></span>
+        <div class="translations" :class="{active: showTranslations}">
+          <div class="translations-inner">
+            <div class="translation-items">
+              <div @click="chooseBookTranslation('en')">English</div>
+              <div @click="chooseBookTranslation('de')">German</div>
+            </div>
+            <div class="translations-info">
+              Translations have different numbers of pages
+            </div>
+          </div>
+        </div>
+      </div>
     </nav>
     <div class="search-wrap">
       <div class="search-input">
@@ -36,6 +50,8 @@
   export default {
     data() {
       return {
+        showTranslations: false,
+        activeTranslation: 'en',
         userWordsPerMinute: 250,
         bookSearch: '',
         latestSearch: '',
@@ -49,9 +65,40 @@
     mounted() {
       this.search = debounce(this.search, SEARCH_TIME_MS)
       this.setUserWordsPerMinute()
+      this.setBookTranslation()
+      this.registerCloseDropdownEvent()
     },
     
     methods: {
+      registerCloseDropdownEvent() {
+        document.body.onclick = ({target}) => {
+          if(target !== document.querySelector('.translations-wrap span') && this.showTranslations) {
+            this.showTranslations = false
+          }
+        }
+      },
+
+      toggleTranslations() {
+        this.showTranslations = !this.showTranslations
+      },
+      
+      setBookTranslation() {
+        if( ! localStorage.getItem('translation')) {
+          localStorage.setItem('translation', this.activeTranslation)
+        }
+
+        this.activeTranslation = localStorage.getItem('translation')
+      },
+      
+      chooseBookTranslation(translation) {
+        localStorage.setItem('translation', translation)
+        this.activeTranslation = translation
+        
+        this.results = []
+        this.hasSearched = false
+        this.bookSearch = ''
+      },
+      
       setUserWordsPerMinute() {
         if( ! localStorage.getItem('wpm')) {
           localStorage.setItem('wpm', this.userWordsPerMinute.toString())
@@ -89,7 +136,7 @@
           this.isLoading = true
           this.latestSearch = bookSearch
           
-          http.get(`/api?q=${this.bookSearch}`)
+          http.get(`/api?q=${this.bookSearch}&translation=${this.activeTranslation}`)
             .then(({data}) => {
               this.hasSearched = true
 
