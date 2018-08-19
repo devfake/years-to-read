@@ -14,10 +14,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
-  const q = req.query.q
+  const {q, translation} = req.query
   const key = process.env.GOOGLE_API_KEY
   
-  http.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&key=${key}&fields=items(volumeInfo/title,volumeInfo/pageCount,volumeInfo/imageLinks/smallThumbnail)&maxResults=1`)
+  http.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&key=${key}&fields=items(volumeInfo/title,volumeInfo/pageCount,volumeInfo/imageLinks/smallThumbnail)&maxResults=1&langRestrict=${translation}`)
     .then(({data}) => {
       const formattedData = buildResponse(data)
       
