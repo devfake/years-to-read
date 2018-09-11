@@ -30,7 +30,8 @@
         <div class="result" v-for="result in results">
           <span class="cover" :style="{backgroundImage: `url(${result.thumbnail || '/img/no-cover.png'}`}"></span>
           <span class="title">{{ result.title }}</span>
-          <span class="time">will probably take {{ timeToRead }} to read</span>
+          <span v-if="timeToRead" class="time">will probably take {{ timeToRead }} to read</span>
+          <span v-else class="time">Sorry, we have no page data for this book</span>
         </div>
       </div>
     </div>
@@ -121,7 +122,7 @@
           const [hours, minutes] = result.split(':')
           
           this.timeToRead = `${this.removeLeadingZero(hours)} hours and ${this.removeLeadingZero(minutes)} minutes`
-        }
+        } else this.timeToRead = null;
       },
       
       removeLeadingZero(time) {

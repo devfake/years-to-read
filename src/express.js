@@ -34,7 +34,7 @@ app.get('/api', (req, res) => {
 
 function buildResponse(data) {
   let formattedData = []
-  
+
   if(responseIsEmpty(data)) {
     return emptyResponse()
   }
@@ -47,7 +47,7 @@ function buildResponse(data) {
 }
 
 function responseIsEmpty(data) {
-  return data.totalItems === 0
+  return Object.keys(data).length === 0 || data.totalItems === 0
 }
 
 function emptyResponse() {
