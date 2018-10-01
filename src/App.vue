@@ -27,7 +27,8 @@
       </div>
       <i class="icon-loading" v-show="isLoading"></i>
       <div class="result-wrap" v-if="hasSearched">
-        <span v-if="!results.length" class="nothing-found">Nothing found :(</span>
+        <span v-if="!results.length && !isForbidden" class="nothing-found">Nothing found :(</span>
+        <span v-if="isForbidden" class="error">This service is currently unavailable due to too many requests</span>
         <div class="result" v-for="result in results">
           <span class="cover" :style="{backgroundImage: `url(${result.thumbnail || '/img/no-cover.png'}`}"></span>
           <span class="title">{{ result.title }}</span>
@@ -61,6 +62,7 @@
         hasSearched: false,
         results: [],
         timeToRead: '',
+        isForbidden: false
       }
     },
 
@@ -144,6 +146,8 @@
 
               if(data.status === 404) {
                 this.results = []
+              } else if(data.status === 403) {
+                this.isForbidden = true
               } else {
                 this.results = data
                 this.calculateReadingTime(data[0].pages)
