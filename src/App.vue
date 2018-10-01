@@ -49,7 +49,9 @@
   const SEARCH_TIME_MS = 400
   const AVERAGE_WORDS_PER_PAGE = 280
   const DEFAULT_TIME = 60
-  
+  const STATUS_FORBIDDEN = 403
+  const STATUS_NOT_FOUND = 404
+
   export default {
     data() {
       return {
@@ -144,9 +146,9 @@
             .then(({data}) => {
               this.hasSearched = true
 
-              if(data.status === 404) {
+              if(data.status === STATUS_NOT_FOUND) {
                 this.results = []
-              } else if(data.status === 403) {
+              } else if(data.status === STATUS_FORBIDDEN) {
                 this.isForbidden = true
               } else {
                 this.results = data
