@@ -12,6 +12,7 @@
               <div @click="chooseBookTranslation('en')">English</div>
               <div @click="chooseBookTranslation('de')">Deutsche</div>
 	      <div @click="chooseBookTranslation('fr')">Français</div>
+	      <div @click="chooseBookTranslation('nl')">Nederlands</div>
             </div>
             <div class="translations-info">
               Translations have different numbers of pages
