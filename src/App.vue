@@ -10,7 +10,7 @@
           <div class="translations-inner">
             <div class="translation-items">
               <div @click="chooseBookTranslation('en')">English</div>
-	      <div @click="chooseBookTranslation('jp')">Japanese</div>
+	      　<div @click="chooseBookTranslation('jp')">日本語</div>
               <div @click="chooseBookTranslation('de')">Deutsche</div>
 	      <div @click="chooseBookTranslation('fr')">Français</div>
             </div>
