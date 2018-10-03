@@ -9,6 +9,7 @@
         <div class="translations" :class="{active: showTranslations}">
           <div class="translations-inner">
             <div class="translation-items">
+	      <div @click="chooseBookTranslation('el')">Ελληνικά</div>
               <div @click="chooseBookTranslation('en')">English</div>
               <div @click="chooseBookTranslation('de')">Deutsche</div>
 	      <div @click="chooseBookTranslation('fr')">Français</div>
