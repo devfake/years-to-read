@@ -14,6 +14,7 @@
 	      <div @click="chooseBookTranslation('jp')">日本語</div>
               <div @click="chooseBookTranslation('de')">Deutsch</div>
 	      <div @click="chooseBookTranslation('fr')">Français</div>
+			  <div @click="chooseBookTranslation('hu')">Magyar</div>
               <div @click="chooseBookTranslation('es')">Español</div>
               <div @click="chooseBookTranslation('da')">Dansk</div>
 	      <div @click="chooseBookTranslation('nl')">Nederlands</div>
