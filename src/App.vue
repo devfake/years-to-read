@@ -9,7 +9,7 @@
         <div class="translations" :class="{active: showTranslations}">
           <div class="translations-inner">
             <div class="translation-items">
-	       <div @click="chooseBookTranslation('el')">Ελληνικά</div>
+	      <div @click="chooseBookTranslation('el')">Ελληνικά</div>
               <div @click="chooseBookTranslation('en')">English</div>
               <div @click="chooseBookTranslation('de')">Deutsch</div>
               <div @click="chooseBookTranslation('kk')">Kazakh</div>
@@ -17,13 +17,14 @@
 	      <div @click="chooseBookTranslation('hi')">Hindi</div>
               <div @click="chooseBookTranslation('ca')">Català</div>
 	      <div @click="chooseBookTranslation('jp')">日本語</div>
-			  <div @click="chooseBookTranslation('hu')">Magyar</div>
+	      <div @click="chooseBookTranslation('hu')">Magyar</div>
               <div @click="chooseBookTranslation('es')">Español</div>
               <div @click="chooseBookTranslation('da')">Dansk</div>
 	      <div @click="chooseBookTranslation('nl')">Nederlands</div>
 	      <div @click="chooseBookTranslation('pt')">Português</div>
-			        <div @click="chooseBookTranslation('it')">Italiano</div>
-	            <div @click="chooseBookTranslation('ru')">Русский</div>
+	      <div @click="chooseBookTranslation('pt-br')">Brasileiro</div>
+              <div @click="chooseBookTranslation('it')">Italiano</div>
+	      <div @click="chooseBookTranslation('ru')">Русский</div>
             </div>
             <div class="translations-info">
               Translations have different numbers of pages
