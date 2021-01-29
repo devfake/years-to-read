@@ -22,6 +22,12 @@ body {
   padding: 0 20px;
 }
 
+@media screen and (min-width: 2000px) {
+  body {
+    background-size: contain;
+  }
+}
+
 #app {
   margin: 0 auto;
   display: block;
