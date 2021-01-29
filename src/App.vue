@@ -24,6 +24,9 @@
 	      <div @click="chooseBookTranslation('pt')">Português</div>
 			        <div @click="chooseBookTranslation('it')">Italiano</div>
 	            <div @click="chooseBookTranslation('ru')">Русский</div>
+              <div @click="chooseBookTranslation('ko')">한국어</div>
+              <div @click="chooseBookTranslation(zh-CN)">中文(简体)</div>
+              <div @click="chooseBookTranslation(zh-TW)">中文(繁體)</div>
             </div>
             <div class="translations-info">
               Translations have different numbers of pages
@@ -55,9 +58,9 @@
 <script>
   import http from 'axios'
   import debounce from 'debounce'
-  
+
   import AppModal from './Modal'
-  
+
   const SEARCH_TIME_MS = 400
   const AVERAGE_WORDS_PER_PAGE = 280
   const DEFAULT_TIME = 60
@@ -86,7 +89,7 @@
       this.setBookTranslation()
       this.registerCloseDropdownEvent()
     },
-    
+
     methods: {
       registerCloseDropdownEvent() {
         document.body.onclick = ({target}) => {
@@ -99,7 +102,7 @@
       toggleTranslations() {
         this.showTranslations = !this.showTranslations
       },
-      
+
       setBookTranslation() {
         if( ! localStorage.getItem('translation')) {
           localStorage.setItem('translation', this.activeTranslation)
@@ -107,16 +110,16 @@
 
         this.activeTranslation = localStorage.getItem('translation')
       },
-      
+
       chooseBookTranslation(translation) {
         localStorage.setItem('translation', translation)
         this.activeTranslation = translation
-        
+
         this.results = []
         this.hasSearched = false
         this.bookSearch = ''
       },
-      
+
       setUserWordsPerMinute() {
         if( ! localStorage.getItem('wpm')) {
           localStorage.setItem('wpm', this.userWordsPerMinute.toString())
@@ -124,7 +127,7 @@
 
         this.userWordsPerMinute = +localStorage.getItem('wpm')
       },
-      
+
       calculateReadingTime(pages) {
         if(pages) {
           const words = pages * AVERAGE_WORDS_PER_PAGE
@@ -137,23 +140,23 @@
           const result = date.toISOString().substr(11, 5)
 
           const [hours, minutes] = result.split(':')
-          
+
           this.timeToRead = `${this.removeLeadingZero(hours)} hours and ${this.removeLeadingZero(minutes)} minutes`
         } else this.timeToRead = null;
       },
-      
+
       removeLeadingZero(time) {
         return time.replace(/^0+/, '') || 0
       },
-      
+
       search() {
         const bookSearch = this.bookSearch.trim()
-        
+
         if(bookSearch && bookSearch !== this.latestSearch) {
           this.hasSearched = false
           this.isLoading = true
           this.latestSearch = bookSearch
-          
+
           http.get(`/api?q=${this.bookSearch}&translation=${this.activeTranslation}`)
             .then(({data}) => {
               this.hasSearched = true
@@ -166,23 +169,23 @@
                 this.results = data
                 this.calculateReadingTime(data[0].pages)
               }
-              
+
               this.isLoading = false
-            }) 
+            })
         }
-        
+
         if(!bookSearch) {
           this.latestSearch = ''
           this.hasSearched = false
           this.results = []
         }
       },
-      
+
       showSpeedModal() {
         this.$modal.show('speed')
       }
     },
-    
+
     components: {
       AppModal
     }
